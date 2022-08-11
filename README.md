@@ -1,6 +1,6 @@
 # データベース設計
 
-# users table
+## users table
 | Column             | Type   | Options                            |
 |------------------------------------------------------------------|
 | nickname           | string | null: false                        |
@@ -9,13 +9,13 @@
 | hospital           | string | null: false                        |
 | emergency contact  | string | null: false                        |
 
-## Association
+### Association
 has_many :days
 has_many :medicines
 has_many :life_events
 has_many :posts
 
-# medicines table
+## medicines table
 | Column             | Type       | Options                        |
 |------------------------------------------------------------------|
 | medicine_name      | string     | null: false                    |
@@ -23,10 +23,10 @@ has_many :posts
 | medicine_timing_id | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
-## Association
+### Association
 belongs_to :user
 
-# life_events table
+## life_events table
 | Column             | Type       | Options                        |
 |------------------------------------------------------------------|
 | events             | string     | null: false                    |
@@ -34,16 +34,16 @@ belongs_to :user
 | month              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
-## Association
+### Association
 belongs_to :user
 
-# days table
+## days table
 | Column             | Type       | Options                        |
 |------------------------------------------------------------------|
 | mood_score_id      | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
-## Association
+### Association
 belongs_to :user
 has_many :posts
 
@@ -55,6 +55,6 @@ has_many :posts
 | user               | references | null: false, foreign_key: true |
 | days               | references | null: false, foreign_key: true |
 
-## Association
+### Association
 belongs_to :user
 belongs_to :days
