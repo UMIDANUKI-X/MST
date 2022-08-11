@@ -1,24 +1,60 @@
-# README
+# データベース設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# users table
+| Column             | Type   | Options                            |
+|------------------------------------------------------------------|
+| nickname           | string | null: false                        |
+| email              | string | null: false unique: true           |
+| encrypted_password | string | null: false                        |
+| hospital           | string | null: false                        |
+| emergency contact  | string | null: false                        |
 
-Things you may want to cover:
+## Association
+has_many :days
+has_many :medicines
+has_many :life_events
+has_many :posts
 
-* Ruby version
+# medicines table
+| Column             | Type       | Options                        |
+|------------------------------------------------------------------|
+| medicine_name      | string     | null: false                    |
+| medicine_amount    | string     | null: false                    |
+| medicine_timing_id | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* System dependencies
+## Association
+belongs_to :user
 
-* Configuration
+# life_events table
+| Column             | Type       | Options                        |
+|------------------------------------------------------------------|
+| events             | string     | null: false                    |
+| year               | integer    | null: false                    |
+| month              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* Database creation
+## Association
+belongs_to :user
 
-* Database initialization
+# days table
+| Column             | Type       | Options                        |
+|------------------------------------------------------------------|
+| mood_score_id      | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* How to run the test suite
+## Association
+belongs_to :user
+has_many :posts
 
-* Services (job queues, cache servers, search engines, etc.)
+## posts table
+| Column             | Type       | Options                        |
+|------------------------------------------------------------------|
+| content            | string     | null: false                    |
+| category_id        | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
+| days               | references | null: false, foreign_key: true |
 
-* Deployment instructions
-
-* ...
+## Association
+belongs_to :user
+belongs_to :days
